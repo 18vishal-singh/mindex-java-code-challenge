@@ -10,4 +10,5 @@ public interface EmployeeService {
     Employee update(Employee employee);
     ReportingStructure getRepoteeCount(String id);
 	Compensation getCompensation(String id);
+	Compensation createCompensation(Compensation compensation);
 }

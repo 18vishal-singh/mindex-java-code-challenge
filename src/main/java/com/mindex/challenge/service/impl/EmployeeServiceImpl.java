@@ -76,4 +76,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 		return compensation;
 	}
+
+	@Override
+	public Compensation createCompensation(Compensation compensation) {
+		LOG.debug("Creating employeeCompensation");
+
+		compensation.setEmployeeId(UUID.randomUUID().toString());
+		LOG.debug("Creating compensation for empId : [{}]",compensation.getEmployeeId());
+        compensationRepository.insert(compensation);
+
+        return compensation;
+	}
 }

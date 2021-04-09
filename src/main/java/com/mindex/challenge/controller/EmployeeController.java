@@ -52,4 +52,11 @@ public class EmployeeController {
         return employeeService.getCompensation(id);
     }
     
+    @PostMapping("/employee/compensation")
+    public Compensation createCompensation(@RequestBody Compensation compensation) {
+        LOG.debug("Received employee create request for [{}]", compensation);
+
+        return employeeService.createCompensation(compensation);
+    }
+    
 }
