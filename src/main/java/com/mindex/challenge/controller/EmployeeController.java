@@ -1,5 +1,6 @@
 package com.mindex.challenge.controller;
 
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
@@ -39,9 +40,16 @@ public class EmployeeController {
     
     @GetMapping("/employee/numberOfReports/{id}")
     public ReportingStructure getNumberOfReports(@PathVariable String id) {
-        LOG.debug("Received employee create request for id [{}]", id);
+        LOG.debug("Received employee getRepotee request for id [{}]", id);
 
         return employeeService.getRepoteeCount(id);
+    }
+    
+    @GetMapping("/employee/compensation/{id}")
+    public Compensation getCompensation(@PathVariable String id) {
+        LOG.debug("Received employee getCompensation request for id [{}]", id);
+
+        return employeeService.getCompensation(id);
     }
     
 }

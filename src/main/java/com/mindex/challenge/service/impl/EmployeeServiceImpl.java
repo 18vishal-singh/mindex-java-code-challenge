@@ -1,6 +1,8 @@
 package com.mindex.challenge.service.impl;
 
+import com.mindex.challenge.dao.CompensationRepository;
 import com.mindex.challenge.dao.EmployeeRepository;
+import com.mindex.challenge.data.Compensation;
 import com.mindex.challenge.data.Employee;
 import com.mindex.challenge.data.ReportingStructure;
 import com.mindex.challenge.service.EmployeeService;
@@ -17,6 +19,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+    private CompensationRepository compensationRepository;
 
     @Override
     public Employee create(Employee employee) {
@@ -50,7 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     
     @Override
 	public ReportingStructure getRepoteeCount(String id) {
-		LOG.debug("Getting all repotte under employee id [{}]", id);
+		LOG.debug("Getting all repotee under employee id [{}]", id);
 		Employee employee = employeeRepository.findByEmployeeId(id);
 		
 		if (employee == null) {
@@ -59,5 +64,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		ReportingStructure reportingStructure = new ReportingStructure(employee.getFirstName()+" "+employee.getLastName(), employee.getDirectReports().size());
 		return reportingStructure;
+	}
+
+	@Override
+	public Compensation getCompensation(String id) {
+		LOG.debug("Getting all compensation details for empoyee id [{}] ",id);
+		Compensation compensation = compensationRepository.findByEmployeeId(id);
+		
+		if (compensation == null) {
+            throw new RuntimeException("Invalid Compensation for employeId: " + id);
+        }
+		return compensation;
 	}
 }
